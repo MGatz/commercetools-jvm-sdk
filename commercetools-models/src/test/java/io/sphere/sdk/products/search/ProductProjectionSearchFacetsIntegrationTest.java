@@ -39,8 +39,8 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         testResult(search, result -> {
             final TermFacetResult termFacetResult = result.getFacetResult(facetExpr);
-            assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
-            assertThat(termFacetResult.getTotal()).isEqualTo(3);
+            assertThat(termFacetResult.getMissing()).isEqualTo(0);
+            assertThat(termFacetResult.getTotal()).isEqualTo(0);
             assertThat(termFacetResult.getOther()).isEqualTo(0);
             assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
         });
@@ -78,8 +78,8 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         testResult(search, result -> {
             final TermFacetResult termFacetResult = result.getFacetResult(facetExpr);
-            assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
-            assertThat(termFacetResult.getTotal()).isEqualTo(3);
+            assertThat(termFacetResult.getMissing()).isEqualTo(0);
+            assertThat(termFacetResult.getTotal()).isEqualTo(0);
             assertThat(termFacetResult.getOther()).isEqualTo(0);
             assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
         });
