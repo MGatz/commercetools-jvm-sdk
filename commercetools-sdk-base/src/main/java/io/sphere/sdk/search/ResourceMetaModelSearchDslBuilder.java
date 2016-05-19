@@ -27,6 +27,8 @@ public interface ResourceMetaModelSearchDslBuilder<B, T, C extends MetaModelSear
 
     B fuzzyLevel(final Integer fuzzyLevel);
 
+    B legacyFacets(final Boolean legacyFacets);
+
     B facets(final List<FacetExpression<T>> facets);
 
     B facets(final Function<F, FacetExpression<T>> m);

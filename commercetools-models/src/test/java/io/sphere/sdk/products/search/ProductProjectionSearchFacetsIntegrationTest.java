@@ -39,8 +39,8 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         testResult(search, result -> {
             final TermFacetResult termFacetResult = result.getFacetResult(facetExpr);
-            assertThat(termFacetResult.getMissing()).isEqualTo(0);
-            assertThat(termFacetResult.getTotal()).isEqualTo(0);
+            assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
+            assertThat(termFacetResult.getTotal()).isEqualTo(3);
             assertThat(termFacetResult.getOther()).isEqualTo(0);
             assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
         });
@@ -78,8 +78,8 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         testResult(search, result -> {
             final TermFacetResult termFacetResult = result.getFacetResult(facetExpr);
-            assertThat(termFacetResult.getMissing()).isEqualTo(0);
-            assertThat(termFacetResult.getTotal()).isEqualTo(0);
+            assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
+            assertThat(termFacetResult.getTotal()).isEqualTo(3);
             assertThat(termFacetResult.getOther()).isEqualTo(0);
             assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
         });
@@ -130,6 +130,18 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         testResult(search, result -> {
             assertThat(facetExpr.resultPath()).isEqualTo(alias);
             assertThat(result.getFacetResult(facetExpr).getCount()).isEqualTo(2);
+        });
+    }
+
+    @Test
+    public void legacyFacetsAreSupported() throws Exception {
+        // Todo: probably the best way to test is to check for the deprecation header
+
+        final TermFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
+        final ProductProjectionSearch search  = ProductProjectionSearch.ofStaged().withLegacyFacets(true).plusFacets(facetExpr);
+        testResult(search, result -> {
+            // the 'total' field is dropped when using aggregations so it returning 'total' != 0 indicates that legacy facets are used
+            assertThat(result.getFacetResult(facetExpr).getTotal()).isGreaterThan(0);
         });
     }
 

@@ -66,6 +66,11 @@ public final class ProductProjectionSearchBuilder extends ResourceMetaModelSearc
     }
 
     @Override
+    public ProductProjectionSearchBuilder legacyFacets(final Boolean legacyFacets) {
+        return super.legacyFacets(legacyFacets);
+    }
+
+    @Override
     public ProductProjectionSearchBuilder limit(final Long limit) {
         return super.limit(limit);
     }

@@ -22,14 +22,14 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an ResourceSearch with modified fuzzy parameter.
+     * Returns a ResourceSearch with modified fuzzy parameter.
      * @param fuzzy a flag to indicate if fuzzy search is enabled (true) or not (false)
-     * @return an ResourceSearch with the new fuzzy flag setting
+     * @return a ResourceSearch with the new fuzzy flag setting
      */
     C withFuzzy(final Boolean fuzzy);
 
     /**
-     * Returns an ResourceSearch with modified fuzzyLevel parameter.
+     * Returns a ResourceSearch with modified fuzzyLevel parameter.
      *
      * {@include.example io.sphere.sdk.products.search.FuzzyLevelIntegrationTest#fuzzyLevel()}
      *
@@ -37,6 +37,13 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends ResourceSearch<
      * @return an ResourceSearch with the new fuzzyLevel setting
      */
     C withFuzzyLevel(final Integer fuzzyLevel);
+
+    /**
+     * Returns a new object with modified legacyFacets parameter.
+     * @param legacyFacets a flag to indicate if legacy facets are enabled (true) or not (false)
+     * @return a new object with the new legacyFacets flag setting
+     */
+    C withLegacyFacets(final Boolean legacyFacets);
 
     /**
      * Returns a new object with the new limit.

@@ -16,6 +16,9 @@ public interface ResourceSearch<T> extends Search<T> {
     Integer fuzzyLevel();
 
     @Nullable
+    Boolean isLegacyFacets();
+
+    @Nullable
     Long limit();
 
     @Nullable

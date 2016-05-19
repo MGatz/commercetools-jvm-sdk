@@ -82,6 +82,9 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withFuzzyLevel(final Integer fuzzyLevel);
 
     @Override
+    ProductProjectionSearch withLegacyFacets(final Boolean legacyFacets);
+    
+    @Override
     ProductProjectionSearch withFacets(final List<FacetExpression<ProductProjection>> facets);
 
     @Override
